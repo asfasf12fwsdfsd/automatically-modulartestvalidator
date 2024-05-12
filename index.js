@@ -1,8 +1,21 @@
-function minCostClimbingStairs(cost) {
-  const n = cost.length;
-  const dp = new Array(n + 1).fill(0);
-  for (let i = 2; i <= n; i++) {
-    dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+function addTwoNumbers(l1, l2) {
+  const dummy = new ListNode(0);
+  let p = l1,
+    q = l2,
+    curr = dummy;
+  let carry = 0;
+  while (p !== null || q !== null) {
+    const x = p !== null ? p.val : 0;
+    const y = q !== null ? q.val : 0;
+    const sum = x + y + carry;
+    carry = Math.floor(sum / 10);
+    curr.next = new ListNode(sum % 10);
+    curr = curr.next;
+    if (p !== null) p = p.next;
+    if (q !== null) q = q.next;
   }
-  return dp[n];
+  if (carry > 0) {
+    curr.next = new ListNode(carry);
+  }
+  return dummy.next;
 }
